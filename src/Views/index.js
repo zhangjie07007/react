@@ -8,8 +8,8 @@ import { Loading } from '../components'
 // import Settings from './Settings'
 // import Dashboard from './Dashboard'
 // import Edit from './Article/Edit'
-//路由懒加载实现
-const Article = Loadable({
+
+const Article = Loadable({   //路由懒加载实现
     loader:() => import('./Article'),
     loading:Loading
 })
