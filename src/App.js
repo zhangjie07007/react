@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import { adminRouter } from './Routes'
-import { NavLink as Link, Route, Switch,Redirect } from 'react-router-dom'
+import { NavLink as Link, Route, Switch, Redirect } from 'react-router-dom'
 import { Button } from 'antd'
 import { connect } from 'react-redux'
+import { Frame } from './components'
+import './App.less'
 class App extends Component {
     componentDidMount() {
         console.log(this.props)
     }
     render() {
+        let nav = adminRouter.filter(item=>item.isNav === true)
+        // console.log(nav)
         return (
-            <div>
-                <Button icon='github' type='primary' size='default'>github</Button>
+            <Frame nav = {nav}>
                 <Switch>
                     {adminRouter.map(item => {
                         return <Route
@@ -22,9 +25,9 @@ class App extends Component {
                             }} />
                     })}
                     <Redirect from='/admin' to={adminRouter[0].pathname} exact />
-                    <Redirect to = '/404' />
+                    <Redirect to='/404' />
                 </Switch>
-            </div>
+            </Frame>
         )
     }
 }
