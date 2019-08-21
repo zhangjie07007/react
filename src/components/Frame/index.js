@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu,  Icon, Button } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 import { adminRouter } from '../../Routes'
 import img from './logo.jpg'
 import './frame.less'
@@ -12,7 +12,7 @@ const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 @withRouter
 class Frame extends Component {
-    
+
     componentDidMount() {
     }
     menuClick = (msg) => {
@@ -27,29 +27,29 @@ class Frame extends Component {
             <Layout>
                 <Header className="header">
                     <div className="logo" >
-                        <img src = {img} alt='logo' />
+                        <img src={img} alt='logo' />
                     </div>
                 </Header>
-                <Layout>
-                    <Sider width={200} style={{ background: '#fff' }}>
-                        <Menu
-                            mode="inline"
-                            defaultSelectedKeys={['1']}
-                            onClick = {this.menuClick}
-                            defaultOpenKeys={['sub1']}
-                            style={{ height: '100%', borderRight: 0 }}>
-                            {nav.map(item=>{
-                                return <Menu.Item
-                                 key={item.pathname}
-                                 ><Icon type={item.icon} />{item.title}</Menu.Item>
-                            })}
-                        </Menu>
-                    </Sider>
-                    <Layout style={{ padding: '0 24px 24px' }}>
+                <Layout className = 'my-content'>
+                        <Sider width={200} style={{ background: '#fff' }}>
+                            <Menu
+                                mode="inline"
+                                defaultSelectedKeys={['1']}
+                                onClick={this.menuClick}
+                                defaultOpenKeys={['sub1']}
+                                style={{ height: '100%', borderRight: 0 }}>
+                                {nav.map(item => {
+                                    return <Menu.Item
+                                        key={item.pathname}
+                                    ><Icon type={item.icon} />{item.title}</Menu.Item>
+                                })}
+                            </Menu>
+                        </Sider>
+                    <Layout className='layout-content' style={{ padding: ' 5px 2px' }}>
                         <Content
                             style={{
                                 background: '#fff',
-                                padding: 24,
+                                padding: 0,
                                 margin: 0,
                                 minHeight: 280,
                             }}
