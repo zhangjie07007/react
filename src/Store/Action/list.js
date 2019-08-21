@@ -26,8 +26,8 @@ export const getList = () => dispatch => {
     fetch('https://jsonplaceholder.typicode.com/comments')
     .then(res=>res.json())
     .then(res=>{
-        console.log(res)
-        dispatch(getsuccess())
+        // console.log(res)
+        dispatch(getsuccess(res))
     })
     .catch(er=>{
         dispatch(geterror())

@@ -43,6 +43,22 @@ class Article extends Component {
         selectedRowKeys: [], // Check here to configure the default column
         isload:false,
         isPagenation:false,
+        list:[
+            {
+                postId: 1,
+                id: 1,
+                name: "id labore ex et quam laborum",
+                email: "Eliseo@gardner.biz",
+                body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+            },
+            {
+                "postId": 1,
+                "id": 2,
+                "name": "quo vero reiciendis velit similique earum",
+                "email": "Jayne_Kuhic@sydney.com",
+                "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+            }
+        ]
     };
     componentDidMount(){
         // setTimeout(()=>{
@@ -55,8 +71,8 @@ class Article extends Component {
         //         isPagenation:true
         //     })
         // },9000)
-        console.log(this.props.datalist)
         this.props.getList()
+        console.log(this.props.isLoad)
     }
     onSelectChange = selectedRowKeys => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -119,14 +135,13 @@ class Article extends Component {
                     loading = {this.state.isload} 
                     rowSelection={rowSelection} 
                     columns={columns} 
-                    dataSource={this.props.datalist}
-                    pagination={
-                        {
-                            total:90,
-                            pageSize:9,
-                            disabled:this.state.isPagenation,
-                        }
-                }
+                    loading = {this.props.isLoad}
+                    dataSource={this.props.list}
+                    pagination = {{
+                        pageSize:6
+                    }}
+                   
+                
                  />;
 
             </Card>
@@ -135,7 +150,7 @@ class Article extends Component {
 }
 
 const getProps = props => {
-    // console.log(props)
+    console.log(props)
     return {
         list:props.reducer.datalist,
         isLoad:props.reducer.isLoad
