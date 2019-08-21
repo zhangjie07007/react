@@ -22,7 +22,7 @@ class Frame extends Component {
     }
     render() {
         let { nav } = this.props
-        console.log(nav)
+        // console.log(nav)
         return (
             <Layout>
                 <Header className="header">

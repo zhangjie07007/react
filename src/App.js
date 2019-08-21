@@ -7,7 +7,7 @@ import { Frame } from './components'
 import './App.less'
 class App extends Component {
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
     }
     render() {
         let nav = adminRouter.filter(item=>item.isNav === true)
@@ -33,7 +33,7 @@ class App extends Component {
 }
 
 const getState = (state) => {
-    console.log(state.reducer)
+    // console.log(state.reducer)
     return {
         isLoad: state.reducer.isLoad,
         datalist: state.reducer.datalist
