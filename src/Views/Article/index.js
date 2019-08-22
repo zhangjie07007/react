@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Card, Button, Table } from 'antd';
 import { connect } from 'react-redux'
 import {getList} from '../../Store/Action/list'
+import XLSX from 'xlsx'
 //https://jsonplaceholder.typicode.com/todos
 //https://jsonplaceholder.typicode.com/comments
 const columns = [
@@ -62,6 +63,15 @@ class Article extends Component {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     };
+    toExcel = () => {
+        let data = [["a","b"],[1,2]] /* Array of Arrays e.g. [["a","b"],[1,2]] */
+        /* convert state to workbook */
+		let ws = XLSX.utils.aoa_to_sheet(data);
+		let wb = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+		/* generate XLSX file and send to client */
+		XLSX.writeFile(wb, "文章列表.xlsx")
+    }
     render() {
         const { selectedRowKeys } = this.state;
         const rowSelection = {
@@ -112,9 +122,8 @@ class Article extends Component {
             <Card
                 title="文章列表"
                 bordered={false}
-                extra={<Button>导出Excel</Button>}
-                style={{ height: 700 }}
-            >
+                extra={<Button onClick = {this.toExcel}>导出Excel</Button>}
+                style={{ height: 700 }} >
                 <Table 
                     loading = {this.state.isload} 
                     rowSelection={rowSelection} 
@@ -123,9 +132,7 @@ class Article extends Component {
                     dataSource={this.props.list}
                     pagination = {{
                         pageSize:6
-                    }}
-                 />;
-
+                    }} />;
             </Card>
         )
     }
