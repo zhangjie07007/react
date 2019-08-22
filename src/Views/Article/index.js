@@ -64,9 +64,17 @@ class Article extends Component {
         this.setState({ selectedRowKeys });
     };
     toExcel = () => {
-        let data = [["a","b"],[1,2]] /* Array of Arrays e.g. [["a","b"],[1,2]] */
-        /* convert state to workbook */
-		let ws = XLSX.utils.aoa_to_sheet(data);
+        let title = [['name','email','body']]
+        for(let i = 0 ; i < this.props.list.length ; i++){
+            title.push([
+                this.props.list[i].name,
+                this.props.list[i].email,
+                this.props.list[i].body,
+            ])
+        }
+        console.log(title)
+        // let data = [["a","b"],[8,7],[8,7] ]
+		let ws = XLSX.utils.aoa_to_sheet(title);
 		let wb = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
 		/* generate XLSX file and send to client */
