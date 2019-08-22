@@ -1,58 +1,71 @@
 import React, { Component } from 'react'
-import { Card, Button, Table } from 'antd';
+import { Card, Button, Table,Alert } from 'antd';
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import {getList} from '../../Store/Action/list'
 import XLSX from 'xlsx'
-//https://jsonplaceholder.typicode.com/todos
-//https://jsonplaceholder.typicode.com/comments
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-    },
-    {
-        title: 'email',
-        dataIndex: 'email',
-    },
-    {
-        title: 'body',
-        dataIndex: 'body',
-    },
-    {
-        title: '操作',
-        render:(text, record, index)=>{
-            // console.log(text, record, index)
-            return <Button icon = 'edit' size = 'small'>编辑</Button>
-        }
-    },
-];
 
-const data = [];
-for (let i = 0; i < 6; i++) {
-    data.push({
-        key: i,
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`,
-        // option:<Button icon = 'edit' size = 'small'>编辑</Button>
-        
-    });
-}
-
+let {Group} = Button;
+@withRouter
 class Article extends Component {
     state = {
         selectedRowKeys: [], // Check here to configure the default column
         isload:false,
         isPagenation:false,
+        visible: false,
+        columns : [
+            {
+                title: <h3 style = {{color:'#333'}}>name</h3>,
+                dataIndex: 'name',
+                align:'center',
+            },
+            {
+                title: <h3 style = {{color:'#333'}}>email</h3>,
+                dataIndex: 'email',
+                align:'center',
+            },
+            {
+                title: <h3 style = {{color:'#333'}}>内容</h3>,
+                dataIndex: 'body',
+                align:'center',
+            },
+            {
+                title:<h3 style = {{color:'#333'}}>操作</h3>,
+                width:150,
+                align:'center',
+                render:(text, record, index)=>{
+                    // console.log(text, record, index)
+                    return (
+                        <div>
+                            <Group>
+                                <Button size = 'small' type = 'parmary' onClick = {this.toEdit.bind(this,{text, record, index})}>编辑</Button>
+                                <Button size = 'small' type = 'danger' onClick = {this.toDel.bind(this,record)}>删除</Button>
+                            </Group>
+                        </div>
+                    )
+                }
+            },
+        ],
     };
     componentDidMount(){
         this.props.getList()
-        console.log(this.props.isLoad)
+        // console.log(this.props)
     }
     onSelectChange = selectedRowKeys => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     };
+    toEdit (obj)  {
+        // console.log(obj.record.id)
+        this.props.history.push(`/admin/article/edit/${obj.record.id}`)
+    }
+    toDel(msg,e){
+        console.log(msg)
+        this.setState({ visible: true });
+    }
+    handleClose = () => {
+        this.setState({ visible: false });
+      };
     toExcel = () => {
         let title = [['name','email','body']]
         for(let i = 0 ; i < this.props.list.length ; i++){
@@ -121,23 +134,34 @@ class Article extends Component {
                 title="文章列表"
                 bordered={false}
                 extra={<Button onClick = {this.toExcel}>导出Excel</Button>}
-                 >
+                >
+                {this.state.visible ? (
+                    <Alert
+                    banner = {true}
+                    message="Are you sure ？"
+                    type="error"
+                    closable
+                    afterClose={this.handleClose}
+                    showIcon
+                  />
+                    ) : null}
                 <Table 
                     loading = {this.state.isload} 
                     rowSelection={rowSelection} 
-                    columns={columns} 
+                    columns={this.state.columns} 
                     loading = {this.props.isLoad}
                     dataSource={this.props.list}
                     pagination = {{
                         pageSize:6
                     }} />;
+  
             </Card>
         )
     }
 }
 
 const getProps = props => {
-    console.log(props)
+    // console.log(props)
     return {
         list:props.reducer.datalist,
         isLoad:props.reducer.isLoad
