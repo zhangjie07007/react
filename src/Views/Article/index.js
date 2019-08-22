@@ -46,16 +46,6 @@ class Article extends Component {
         isPagenation:false,
     };
     componentDidMount(){
-        // setTimeout(()=>{
-        //     this.setState({
-        //         isload:false
-        //     })
-        // },1000)
-        // setTimeout(()=>{
-        //     this.setState({
-        //         isPagenation:true
-        //     })
-        // },9000)
         this.props.getList()
         console.log(this.props.isLoad)
     }
@@ -131,7 +121,7 @@ class Article extends Component {
                 title="文章列表"
                 bordered={false}
                 extra={<Button onClick = {this.toExcel}>导出Excel</Button>}
-                style={{ height: 700 }} >
+                 >
                 <Table 
                     loading = {this.state.isload} 
                     rowSelection={rowSelection} 

@@ -11,7 +11,6 @@ class App extends Component {
     }
     render() {
         let nav = adminRouter.filter(item=>item.isNav === true)
-        // console.log(nav)
         return (
             <Frame nav = {nav}>
                 <Switch>
