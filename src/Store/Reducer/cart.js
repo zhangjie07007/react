@@ -11,14 +11,12 @@ const initState = [
 export default (state = initState , action) => {
     console.log(action)
     switch(action.type){
-        case actionType.GET_PRODUCT_START:
+        case actionType.ADD_TO_CART:
             return state
-        case actionType.GET_PRODUCT_SUCCESS:
+        case actionType.DELETE_FROM_CART:
             return {
-                ...action.payload
+                ...state
             }
-        case actionType.GET_PRODUCT_ERROR:
-            return {error:'出错了'}
         default: return state
     }
 }

@@ -1,16 +1,15 @@
-const proxy = require( 'http-proxy-middleware' )
-
-module.exports = function ( app ) {
-  // app.use( proxy(标识符,options) )
-  // http://m.maoyan.com/ajax/movieOnInfoList?token=
-  app.use( proxy('/ajax',{
-    target: 'http://m.maoyan.com',
-    changeOrigin: true
-  }))
-
-  // http://www.qinqin.net/index.php?r=class/category&type=1
-  app.use( proxy('/index.php',{
-    target: 'http://www.qinqin.net',
-    changeOrigin: true
-  }))
-}
+const proxy = require('http-proxy-middleware');
+module.exports = function (app) {
+    app.use(proxy('/api', {
+        target: 'http://106.12.79.128:8848',
+        pathRewrite: {
+            "^/api": ""
+        }
+    }));
+    // app.use(proxy('/auth', {
+    //     target: 'http://127.0.0.1:4002/',
+    //     pathRewrite: {
+    //         "^/auth": ""
+    //     }
+    // }));
+};

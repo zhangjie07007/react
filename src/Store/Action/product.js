@@ -22,7 +22,7 @@ const geterror = () => {
 
 export const getProduct = () => dispatch => {
     dispatch(getstart())
-    fetch('https://jsonplaceholder.typicode.com/comments')
+    fetch('http://106.12.79.128:8848/index.json')
     .then(res=>res.json())
     .then(res=>{
         // console.log(res)

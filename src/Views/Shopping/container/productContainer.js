@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import Product from '../ui/product'
-import {connect} from 'react-redux'
-    
+import { getProduct } from '../../../Store/Action/product'
+import {addToCart} from '../../../Store/Action/cart'
+import { connect } from 'react-redux'
 
-export default connect()(Product)
+let getState = state => {
+    // console.log(state.product)
+    return {
+        product: state.product
+    }
+}
+
+export default connect(getState, { getProduct,addToCart })(Product)

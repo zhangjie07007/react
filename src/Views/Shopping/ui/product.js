@@ -46,19 +46,23 @@ class Product extends Component {
     state = {
         columns : [
             {
-                title: '标题',
-                dataIndex: 'name',
+                title: '商品名称',
+                align:'center',
+                dataIndex: 'title',
                 render: text => <a>{text}</a>,
             },
             {
                 title: '数量',
-                dataIndex: 'age',
+                align:'center',
+                dataIndex: 'inventory',
             },
             {
-                title: '描述',
-                dataIndex: 'address',
+                title: '价格',
+                align:'center',
+                dataIndex: 'price',
             },{
                 title:'操作',
+                align:'center',
                 render:()=>{
                     return <Button type= 'primary'>加入购物车</Button>
                 }
@@ -66,7 +70,8 @@ class Product extends Component {
         ]
     }
     componentDidMount(){
-        console.log(this.props)
+        console.log(this.props.product.data)
+        this.props.getProduct()
     }
     handleClick = () => {
         this.props.history.push('/admin/view')
@@ -76,7 +81,7 @@ class Product extends Component {
             <div>
                 <Card title="商品展示"
                     extra={<Button onClick = {this.handleClick} type = 'danger' icon = 'shopping'>去购物车</Button>} >
-                    <Table rowSelection={rowSelection} columns={this.state.columns} dataSource={data} />
+                    <Table rowSelection={rowSelection} columns={this.state.columns} dataSource={this.props.product.data} />
                 </Card>
             </div>
         )
