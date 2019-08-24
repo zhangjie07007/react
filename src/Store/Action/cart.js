@@ -8,6 +8,7 @@ export const addToCart = (item) => {
 }
 
 export const delFromCart = id => {
+    console.log(555)
     return {
         type:actionType.DELETE_FROM_CART,
         payload:id

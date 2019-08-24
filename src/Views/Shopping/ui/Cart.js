@@ -3,15 +3,6 @@ import {Card , Button,Table} from 'antd'
 import { withRouter } from 'react-router-dom'
 import '../index.less'
 
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-    },
-    
-];
 
 // rowSelection object indicates the need for row selection
 const rowSelection = {
@@ -45,11 +36,15 @@ class CartView extends Component {
             },{
                 title: '操作',
                 align:'center',
-                render:()=>{
-                    return <Button type='danger' icon = 'delete'>删除</Button>
+                render:(item)=>{
+                    return <Button onClick = {this.delCart.bind(this,item)} type='danger' icon = 'delete'>删除</Button>
                 }
             },
         ]
+    }
+    delCart(item){
+        console.log(this.props)
+        this.props.delFromCart(item)
     }
     handleClick = () => {
         this.props.history.push('/admin/shopping')

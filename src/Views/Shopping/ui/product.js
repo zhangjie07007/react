@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Table, Card,Button } from 'antd';
 import { withRouter } from 'react-router-dom'
 import { addToCart } from '../../../Store/Action/cart';
+import {getProduct} from '../../../Store/Action/product'
 
 // rowSelection object indicates the need for row selection
 const rowSelection = {
@@ -14,9 +15,11 @@ const rowSelection = {
         name: record.name,
     }),
 };
+
 @withRouter
 class Product extends Component {
     state = {
+        isable:false,
         columns : [
             {
                 title: '商品名称',
@@ -37,13 +40,22 @@ class Product extends Component {
                 title:'操作',
                 align:'center',
                 render:(a,b)=>{
-                    return <Button onClick = {this.addToCart.bind(this,a)} type= 'primary'>加入购物车</Button>
+                    return <Button disabled ={a.inventory?false:true} onClick = {this.addToCart.bind(this,a)} type= 'primary'>加入购物车</Button>
                 }
             }
         ]
     }
+    constructor(){
+        super();
+       
+    }
+    
     componentDidMount(){
-        this.props.getProduct()
+        // console.log(this.props.product.length)
+        if(!this.props.product.length){
+            this.props.getProduct()
+        }
+        
     }
     handleClick = () => {
         this.props.history.push('/admin/view')
@@ -52,13 +64,18 @@ class Product extends Component {
         console.log(this.props)
         console.log(item)
         this.props.addToCart(item)
+        this.props.productReduce(item)
     }
     render() {
         return (
             <div>
+                
                 <Card title="商品展示"
                     extra={<Button onClick = {this.handleClick} type = 'danger' icon = 'shopping'>去购物车</Button>} >
-                    <Table rowSelection={rowSelection} columns={this.state.columns} dataSource={this.props.product.data} />
+                    <Table 
+                    rowSelection={rowSelection} 
+                    columns={this.state.columns} 
+                    dataSource={this.props.product} />
                 </Card>
             </div>
         )

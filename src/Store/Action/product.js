@@ -26,10 +26,17 @@ export const getProduct = () => dispatch => {
     .then(res=>res.json())
     .then(res=>{
         // console.log(res)
-        dispatch(getsuccess(res))
+        dispatch(getsuccess(res.data))
     })
     .catch(er=>{
         dispatch(geterror())
     })
+}
+
+export const productReduce = item => {
+    return {
+        type:actionType.REDUCE_PRODUCT,
+        payload:item
+    }
 }
 
