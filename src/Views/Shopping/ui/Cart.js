@@ -2,21 +2,7 @@ import React, { Component } from 'react'
 import {Card , Button,Table} from 'antd'
 import { withRouter } from 'react-router-dom'
 import '../index.less'
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        render: text => <a>{text}</a>,
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-    },
-];
+
 const data = [
     {
         key: '1',
@@ -39,6 +25,28 @@ const rowSelection = {
 };
 @withRouter
 class CartView extends Component {
+    state = {
+        columns : [
+            {
+                title: 'Name',
+                dataIndex: 'name',
+                render: text => <a>{text}</a>,
+            },
+            {
+                title: 'Age',
+                dataIndex: 'age',
+            },
+            {
+                title: 'Address',
+                dataIndex: 'address',
+            },{
+                title: '操作',
+                render:()=>{
+                    return <Button type='danger' icon = 'delete'>删除</Button>
+                }
+            },
+        ]
+    }
     handleClick = () => {
         this.props.history.push('/admin/shopping')
     }
@@ -48,7 +56,7 @@ class CartView extends Component {
                 <p className = 'cart-head'>购物车商品</p>
                 <Card title="商品列表"
                     extra={<Button onClick = {this.handleClick} type = 'danger' icon = 'rollback'>返回商店</Button>} >
-                    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                    <Table rowSelection={rowSelection} columns={this.state.columns} dataSource={data} />
                 </Card>
             </div>
         )

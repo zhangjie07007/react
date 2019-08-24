@@ -3,21 +3,7 @@ import React, { Component } from 'react'
 import { Table, Card,Button } from 'antd';
 import { withRouter } from 'react-router-dom'
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        render: text => <a>{text}</a>,
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-    },
-];
+
 const data = [
     {
         key: '1',
@@ -57,6 +43,28 @@ const rowSelection = {
 };
 @withRouter
 class Product extends Component {
+    state = {
+        columns : [
+            {
+                title: '标题',
+                dataIndex: 'name',
+                render: text => <a>{text}</a>,
+            },
+            {
+                title: '数量',
+                dataIndex: 'age',
+            },
+            {
+                title: '描述',
+                dataIndex: 'address',
+            },{
+                title:'操作',
+                render:()=>{
+                    return <Button type= 'primary'>加入购物车</Button>
+                }
+            }
+        ]
+    }
     componentDidMount(){
         console.log(this.props)
     }
@@ -68,7 +76,7 @@ class Product extends Component {
             <div>
                 <Card title="商品展示"
                     extra={<Button onClick = {this.handleClick} type = 'danger' icon = 'shopping'>去购物车</Button>} >
-                    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                    <Table rowSelection={rowSelection} columns={this.state.columns} dataSource={data} />
                 </Card>
             </div>
         )
