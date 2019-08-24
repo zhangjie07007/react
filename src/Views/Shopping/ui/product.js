@@ -2,34 +2,7 @@ import React, { Component } from 'react'
 
 import { Table, Card,Button } from 'antd';
 import { withRouter } from 'react-router-dom'
-
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-    },
-    {
-        key: '4',
-        name: 'Disabled User',
-        age: 99,
-        address: 'Sidney No. 1 Lake Park',
-    },
-];
+import { addToCart } from '../../../Store/Action/cart';
 
 // rowSelection object indicates the need for row selection
 const rowSelection = {
@@ -63,18 +36,22 @@ class Product extends Component {
             },{
                 title:'操作',
                 align:'center',
-                render:()=>{
-                    return <Button type= 'primary'>加入购物车</Button>
+                render:(a,b)=>{
+                    return <Button onClick = {this.addToCart.bind(this,a)} type= 'primary'>加入购物车</Button>
                 }
             }
         ]
     }
     componentDidMount(){
-        console.log(this.props.product.data)
         this.props.getProduct()
     }
     handleClick = () => {
         this.props.history.push('/admin/view')
+    }
+    addToCart = (item) => {
+        console.log(this.props)
+        console.log(item)
+        this.props.addToCart(item)
     }
     render() {
         return (

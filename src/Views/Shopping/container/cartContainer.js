@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 
 let getState = state => {
     return {
-
+        cart:state.cart
     }
 }
 
