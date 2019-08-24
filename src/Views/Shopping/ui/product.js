@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { Table, Card,Button } from 'antd';
+import { withRouter } from 'react-router-dom'
 
 const columns = [
     {
@@ -54,17 +55,24 @@ const rowSelection = {
         name: record.name,
     }),
 };
-
-export default class Product extends Component {
+@withRouter
+class Product extends Component {
+    componentDidMount(){
+        console.log(this.props)
+    }
+    handleClick = () => {
+        this.props.history.push('/admin/view')
+    }
     render() {
         return (
             <div>
                 <Card title="商品展示"
-                    extra={<Button type = 'danger' icon = 'shopping'>去购物车</Button>}
-                >
+                    extra={<Button onClick = {this.handleClick} type = 'danger' icon = 'shopping'>去购物车</Button>} >
                     <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
                 </Card>
             </div>
         )
     }
 }
+
+export default Product

@@ -37,6 +37,10 @@ const Shopping = Loadable({
     loader:()=>import('./Shopping'),
     loading:Loading
 })
+const View = Loadable({
+    loader:()=>import('./Shopping/container/cartContainer'),
+    loading:Loading
+})
 
 export {
     Article,
@@ -45,5 +49,6 @@ export {
     Settings,
     Dashboard,
     Shopping,
+    View,
     Edit
 }

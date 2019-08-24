@@ -8,7 +8,6 @@ export default class Shopping extends Component {
             <div>
                 <p className = 'cart-head'>购物车</p>
                 <Product />
-                <Cart />
             </div>
         )
     }
