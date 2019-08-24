@@ -33,6 +33,10 @@ const Edit = Loadable({
     loader:() => import('./Article/Edit'),
     loading:Loading
 })
+const Shopping = Loadable({
+    loader:()=>import('./Shopping'),
+    loading:Loading
+})
 
 export {
     Article,
@@ -40,5 +44,6 @@ export {
     NotFount,
     Settings,
     Dashboard,
+    Shopping,
     Edit
 }

@@ -4,6 +4,7 @@ import {
     Article,
     Edit,
     NotFount,
+    Shopping,
     Settings
 } from '../Views'
 
@@ -40,5 +41,11 @@ export const adminRouter = [
         title:'设置',
         isNav:true,
         icon:'setting'
+    },{
+        pathname:'/admin/shopping',
+        component:Shopping,
+        title:'购物车',
+        isNav:true,
+        icon:'shopping'
     },
 ]
