@@ -60,7 +60,7 @@ class Article extends Component {
         this.props.history.push(`/admin/article/edit/${obj.record.id}`)
     }
     toDel(msg,e){
-        console.log(msg)
+        // console.log(msg)
         this.setState({ visible: true });
     }
     handleClose = () => {
@@ -75,7 +75,7 @@ class Article extends Component {
                 this.props.list[i].body,
             ])
         }
-        console.log(title)
+        // console.log(title)
         // let data = [["a","b"],[8,7],[8,7] ]
 		let ws = XLSX.utils.aoa_to_sheet(title);
 		let wb = XLSX.utils.book_new();

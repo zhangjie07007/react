@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Card , Button,Table} from 'antd'
+import { Card, Button, Table } from 'antd'
 import { withRouter } from 'react-router-dom'
 import '../index.less'
 
@@ -17,48 +17,63 @@ const rowSelection = {
 @withRouter
 class CartView extends Component {
     state = {
-        columns : [
+        priceSum: 0,
+        columns: [
             {
                 title: '商品名称',
-                align:'center',
+                align: 'center',
                 dataIndex: 'title',
                 render: text => <a>{text}</a>,
             },
             {
                 title: '数量',
-                align:'center',
+                align: 'center',
                 dataIndex: 'inventory',
             },
             {
                 title: '价格',
-                align:'center',
+                align: 'center',
                 dataIndex: 'price',
-            },{
+            }, {
                 title: '操作',
-                align:'center',
-                render:(item)=>{
-                    return <Button onClick = {this.delCart.bind(this,item)} type='danger' icon = 'delete'>删除</Button>
+                align: 'center',
+                render: (item) => {
+                    return <Button onClick={this.delCart.bind(this, item)} type='danger' icon='delete'>删除</Button>
                 }
             },
         ]
     }
-    delCart(item){
-        console.log(this.props)
+    delCart(item) {
+        // console.log(this.props)
         this.props.delFromCart(item)
     }
     handleClick = () => {
         this.props.history.push('/admin/shopping')
     }
-    componentDidMount(){
-        console.log(this.props)
+    getSum() {
+        // console.log(this.props.cart)//{id: 1, title: "iPad 4 Mini", price: 500.01, inventory: 1}
+        let arrTemp = this.props.cart
+        let sum = 0;
+        for (let i = 0; i < arrTemp.length; i++) {
+            sum += arrTemp[i].price * arrTemp[i].inventory
+        }
+        this.setState({
+            priceSum: sum
+        })
+    }
+    componentDidMount() {
+        this.getSum()
     }
     render() {
         return (
             <div>
-                <p className = 'cart-head'>购物车商品</p>
+                <p className='cart-head'>购物车商品</p>
                 <Card title="商品列表"
-                    extra={<Button onClick = {this.handleClick} type = 'danger' icon = 'rollback'>返回商店</Button>} >
+                    extra={<Button onClick={this.handleClick} type='danger' icon='rollback'>返回商店</Button>} >
                     <Table rowSelection={rowSelection} columns={this.state.columns} dataSource={this.props.cart} />
+                    <div>
+                        <span className='sum-text'>总价：</span><span className='sum'>{this.state.priceSum}</span>
+                    </div>
                 </Card>
             </div>
         )

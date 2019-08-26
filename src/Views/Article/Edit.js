@@ -4,7 +4,7 @@ import './edit.less'
 @Form.create()
 class Edit extends Component {
     render() {
-        console.log(this.props)
+        // console.log(this.props)
 
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
