@@ -50,7 +50,7 @@ class CartView extends Component {
     handleClick = () => {
         this.props.history.push('/admin/shopping')
     }
-    getSum() {
+    getSum() { //计算总价
         // console.log(this.props.cart)//{id: 1, title: "iPad 4 Mini", price: 500.01, inventory: 1}
         let arrTemp = this.props.cart
         let sum = 0;
