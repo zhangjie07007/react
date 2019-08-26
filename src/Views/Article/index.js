@@ -167,5 +167,5 @@ const getProps = props => {
         isLoad:props.reducer.isLoad
     }
 }
-
+// kkk
  export default connect(getProps,{getList})(Article)
