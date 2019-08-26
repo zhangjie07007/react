@@ -9,7 +9,7 @@ class App extends Component {
     componentDidMount() {
         // console.log(this.props)
     }
-    render() {
+    render() {//渲染
         let nav = adminRouter.filter(item=>item.isNav === true)
         return (
             <Frame nav = {nav}>
