@@ -20,7 +20,7 @@ class CartView extends Component {
         priceSum: 0,
         columns: [
             {
-                title: '商品名称',
+                title: '商品名称',//商品名称
                 align: 'center',
                 dataIndex: 'title',
                 render: text => <a>{text}</a>,
